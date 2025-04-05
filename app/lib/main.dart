@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'dart:developer' as developer;
 import 'package:flutter/services.dart';
+import 'package:quickalert/quickalert.dart';
 
 import './authed_client.dart';
 import 'package:path_provider/path_provider.dart';
@@ -126,8 +127,7 @@ class _MyHomePageState extends State<MyHomePage> {
   late Function restartFn, startFn, stopFn, joinFn, leaveFn;
 
   _MyHomePageState() : super() {
-    restartFn =
-        cmdButtonWrapper(() => zerotierCommand('restart'));
+    restartFn = cmdButtonWrapper(() => zerotierCommand('restart'));
     startFn = cmdButtonWrapper(() => zerotierCommand('start'));
     stopFn = cmdButtonWrapper(() => zerotierCommand('stop'));
     joinFn = cmdButtonWrapper(() => joinNetwork(_idInputController.text));
@@ -141,37 +141,44 @@ class _MyHomePageState extends State<MyHomePage> {
     }
     return Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
       Builder(builder: (BuildContext context) {
-        final color = (runningStatus ? Colors.green : Colors.red)[200];
+        final color = (runningStatus ? Colors.green : Colors.red)[300];
 
         return Column(children: [
-          Icon(runningStatus ? Icons.play_arrow : Icons.stop, color: color, size: 72),
+          Icon(runningStatus ? Icons.play_arrow : Icons.stop,
+              color: color, size: 72),
           Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Text(runningStatus ? 'Running' : 'Stopped', style: TextStyle(color: color, fontSize: 18)),
+            Text(runningStatus ? 'Running' : 'Stopped',
+                style: TextStyle(color: color, fontSize: 18)),
             IconButton(icon: const Icon(Icons.refresh), onPressed: loadStatus)
           ])
         ]);
       }),
-      ButtonBar(
-        alignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.max,
+      IntrinsicWidth(
+          child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           OutlinedButton.icon(
+            style: const ButtonStyle(alignment: Alignment.centerLeft),
             onPressed: startFn(),
             label: const Text('Start'),
             icon: const Icon(Icons.play_arrow),
           ),
           OutlinedButton.icon(
+            style: const ButtonStyle(alignment: Alignment.centerLeft),
             onPressed: restartFn(),
             label: const Text('Restart'),
             icon: const Icon(Icons.restart_alt),
           ),
           OutlinedButton.icon(
+            style: const ButtonStyle(alignment: Alignment.centerLeft),
             onPressed: stopFn(),
             label: const Text('Stop'),
             icon: const Icon(Icons.stop),
           ),
         ],
-      )
+      ))
     ]);
   }
 
@@ -196,7 +203,14 @@ class _MyHomePageState extends State<MyHomePage> {
                       decoration: const InputDecoration(
                           labelText: "network id", icon: Icon(Icons.router)))),
               OutlinedButton.icon(
-                  onPressed: joinFn(),
+                  onPressed: () {
+                    joinFn()();
+                    QuickAlert.show(
+                      context: context,
+                      type: QuickAlertType.success,
+                      text: 'Joined ${_idInputController.text}',
+                    );
+                  },
                   label: const Text('Join'),
                   icon: const Icon(Icons.add)),
             ]),
@@ -231,15 +245,30 @@ class _MyHomePageState extends State<MyHomePage> {
                                     width: 96,
                                     child: Row(children: [
                                       IconButton(
-                                          onPressed: () => Clipboard.setData(
-                                                  ClipboardData(
-                                                      text: networkList[i]))
-                                              .then,
+                                          onPressed: () {
+                                            Clipboard.setData(ClipboardData(
+                                                text: networkList[i]));
+                                            QuickAlert.show(
+                                              context: context,
+                                              type: QuickAlertType.success,
+                                              text: 'Copied to clipboard!',
+                                            );
+                                          },
                                           tooltip: '复制',
                                           icon: const Icon(Icons.copy)),
                                       IconButton(
-                                          onPressed: () =>
-                                              leaveNetwork(networkList[i]),
+                                          onPressed: () => QuickAlert.show(
+                                              context: context,
+                                              type: QuickAlertType.confirm,
+                                              text:
+                                                  'Delete network ${networkList[i]} ?',
+                                              confirmBtnText: 'Yes',
+                                              cancelBtnText: 'No',
+                                              confirmBtnColor: Colors.green,
+                                              onConfirmBtnTap: () {
+                                                leaveNetwork(networkList[i]);
+                                                Navigator.pop(context);
+                                              }),
                                           tooltip: '离开',
                                           icon: const Icon(Icons.close)),
                                     ]))));
@@ -252,11 +281,19 @@ class _MyHomePageState extends State<MyHomePage> {
         ));
   }
 
+  peersPage({bool title = false}) {
+    if (title) {
+      return 'Peers';
+    }
+    return Container();
+  }
+
   int currentPageIndex = 0;
   genWidgetList({bool title = false}) {
     return [
       homePage(title: title),
-      networkPage(title: title)
+      networkPage(title: title),
+      peersPage(title: title)
     ][currentPageIndex];
   }
 
@@ -281,6 +318,11 @@ class _MyHomePageState extends State<MyHomePage> {
               selectedIcon: Icon(Icons.router),
               icon: Icon(Icons.router_outlined),
               label: 'Network',
+            ),
+            NavigationDestination(
+              selectedIcon: Icon(Icons.account_box),
+              icon: Icon(Icons.account_box_outlined),
+              label: 'Peers',
             ),
           ],
         ),

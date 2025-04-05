@@ -97,3 +97,11 @@ ZeroTier 可执行文件和操作的 Shell 脚本放在 `/data/adb/zerotier/` �
 ## 自行编译
 
 参考 `.github/workflow/build-{gcc|ndk}.yml`
+
+## 注意
+
+1.14.0 后 ZeroTierOne 引入了 `multi-core concurrent packet processing` ，其中使用了 `pthread_setaffinity_np` 实现线程亲和性设置
+
+但 `pthread_setaffinity_np` 在 NDK 的 API level 36, Android 16 才受支持。 (参考 https://android.googlesource.com/platform/bionic/+/master/libc/include/pthread.h)
+
+所以 NDK 中他被替换成了 `<pthread.h>` 中 `pthread_gettid_np` 和 `<sched.h>` 中 `sched_getaffinity` 的组合，来实现相同的功能

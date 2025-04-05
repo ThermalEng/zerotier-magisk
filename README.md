@@ -102,8 +102,6 @@ refer to `.github/workflow/build-{gcc|ndk}.yml` for detailed information.
 
 After 1.14.0, ZeroTierOne has introduce `multi-core concurrent packet processing`, which requires `pthread_setaffinity_np`.
 
-However, `pthread_setaffinity_np` won't be available until API level 36, Android 16. (refer to https://android.googlesource.com/platform/bionic/+/master/libc/include/pthread.h)
+However, for NDK, `pthread_setaffinity_np` won't be available until API level 36, Android 16. (refer to https://android.googlesource.com/platform/bionic/+/master/libc/include/pthread.h)
 
-So in the NDK bulid version, it'll be replaced by the combination of `pthread_gettid_np` from `<pthread.h>` and `sched_getaffinity` from `<sched.h>`.
-
-We'll add support to this soon. Use the GCC build version to get access to the newest ZeroTierOne.
+So in the NDK bulid version, it is replaced by the combination of `pthread_gettid_np` from `<pthread.h>` and `sched_getaffinity` from `<sched.h>`.
