@@ -5,7 +5,7 @@ on:
 
 env:
   api_version: 28 # min. 21
-  ndk: r27c # android-ndk-$ndk-linux.zip
+  ndk: r28 # android-ndk-$ndk-linux.zip
 
 jobs:
   build:
