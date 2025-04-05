@@ -35,7 +35,7 @@ linux_tap_path = 'ZeroTierOne/osdep/LinuxEthernetTap.cpp'
 linux_tap_match1 = 'int rc = pthread_setaffinity_np(self, sizeof(cpu_set_t), &cpuset);'
 linux_tap_replace1 = 'int rc = sched_setaffinity(pthread_gettid_np(self), sizeof(cpu_set_t), &cpuset);'
 
-linxu_tap_match2 = '#include <sys/utsname.h>'
+linux_tap_match2 = '#include <sys/utsname.h>'
 linux_tap_replace2 = '#include <sys/utsname.h>\n#include <sched.h>'
 
 with open(linux_tap_path, 'r') as file: 
