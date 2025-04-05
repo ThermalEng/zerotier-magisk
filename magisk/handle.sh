@@ -21,6 +21,11 @@ _stop() {
   fi
 
   kill -9 $pid
+  
+  # delete from ip rules
+  ip rule del from all lookup main pref 1
+  ip -6 rule del from all lookup main pref 1
+  
   if [[ $? -ne 0 ]]; then
     log "kill zerotier-one failed"
     return

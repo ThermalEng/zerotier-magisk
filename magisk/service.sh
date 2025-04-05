@@ -33,11 +33,6 @@ mkdir -p $ZTROOT/run
 #             start zerotier
 # ----------------------------------------------
 
-# add main route table to lookup rules
-ip rule add from all lookup main pref 1
-ip -6 rule add from all lookup main pref 1
-
-# start zerotier
 __start
 
 # ----------------------------------------------

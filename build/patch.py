@@ -28,6 +28,25 @@ with open(config_toml_path, 'w') as f:
 
 # -------------------------------------------------------------------------------------------------------
 
+# Patch ZeroTierOne/osdep/LinuxEthernetTap.cpp
+
+linux_tap_path = 'ZeroTierOne/osdep/LinuxEthernetTap.cpp'
+
+linux_tap_match1 = 'int rc = pthread_setaffinity_np(self, sizeof(cpu_set_t), &cpuset);'
+linux_tap_replace1 = 'int rc = sched_setaffinity(pthread_gettid_np(self), sizeof(cpu_set_t), &cpuset);'
+
+linxu_tap_match2 = '#include <sys/utsname.h>'
+linux_tap_replace2 = '#include <sys/utsname.h>\n#include <sched.h>'
+
+with open(linux_tap_path, 'r') as file: 
+    data = file.read()
+    patch_NDK = data.replace(linux_tap_match1, linux_tap_replace1).replace(linux_tap_match2, linux_tap_replace2)
+
+with open(linux_tap_path, 'w') as file:
+    file.write(patch_NDK)
+
+# -------------------------------------------------------------------------------------------------------
+
 # Patch make-linux.mk
 
 make_linux_path = 'ZeroTierOne/make-linux.mk'
@@ -57,19 +76,17 @@ with open(make_linux_path, 'r') as file:
                         'override CFLAGS+=-march=armv7-a -marm -mfpu=vfp -fexceptions'
                     )
     
-    with open(make_linux_path + '.aarch64', 'w') as file:
-        file.write(patch_aarch64)
-    with open(make_linux_path + '.arm', 'w') as file:
-        file.write(patch_arm)
-    with open(make_linux_path + '.arm.ndk', 'w') as file:
-        file.write(patch_arm_ndk)
+with open(make_linux_path + '.aarch64', 'w') as file:
+    file.write(patch_aarch64)
+with open(make_linux_path + '.arm', 'w') as file:
+    file.write(patch_arm)
+with open(make_linux_path + '.arm.ndk', 'w') as file:
+    file.write(patch_arm_ndk)
 
 # Patch ZeroTierOne/osdep/OSUtils.cpp
 
 osutil_path = 'ZeroTierOne/osdep/OSUtils.cpp'
 with open(osutil_path, 'r') as file: 
-    data = file.read().replace(
-                        '/var/lib/zerotier-one', '/data/adb/zerotier/home'
-                    )
+    data = file.read().replace('/var/lib/zerotier-one', '/data/adb/zerotier/home')
 with open(osutil_path, 'w') as file:
     file.write(data)
