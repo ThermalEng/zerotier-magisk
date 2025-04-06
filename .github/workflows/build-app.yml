@@ -14,6 +14,12 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: stable
+      
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'jetbrains'
+          java-version: '21' 
 
       - name: build target apk
         run: |
