@@ -1,0 +1,125 @@
+{
+  "@@locale": "en",
+  "statusRunning": "Running",
+  "statusStopped": "Stopped",
+  "refreshStatusTooltip": "Refresh Status",
+  "startButton": "Start",
+  "restartButton": "Restart",
+  "stopButton": "Stop",
+  "statusDetailsTitle": "ZeroTier Details",
+  "nodeAddressLabel": "Node Address",
+  "softwareVersionLabel": "Software Version",
+  "onlineStatusLabel": "Online Status",
+  "onlineStatusOnline": "Online",
+  "onlineStatusOffline": "Offline",
+  "primaryPortLabel": "Primary Port",
+  "listeningAddressesLabel": "Listening Addresses:",
+  "noListeningAddresses": "None",
+
+  "leaveNetworkConfirmationTitle": "Leave Network?",
+  "leaveNetworkConfirmationText": "Are you sure you want to leave network {networkId}?",
+  "@leaveNetworkConfirmationText": {
+    "placeholders": {
+      "networkId": {
+        "type": "String",
+        "example": "1234567890abcdef"
+      }
+    }
+  },
+  "confirmButton": "Confirm",
+  "cancelButton": "Cancel",
+  "networkIdLabel": "Network ID",
+  "networkIdHint": "Enter 16-character Network ID",
+  "invalidNetworkIdTitle": "Invalid Network ID",
+  "invalidNetworkIdText": "Please enter a 16-character network ID.",
+  "joinButton": "Join",
+  "networksTitle": "Networks",
+  "refreshNetworksTooltip": "Refresh Network List",
+  "noNetworksJoined": "No networks joined",
+  "copiedToClipboard": "Copied {networkId} to clipboard!",
+  "@copiedToClipboard": {
+    "placeholders": {
+      "networkId": {
+        "type": "String",
+        "example": "1234567890abcdef"
+      }
+    }
+  },
+  "copyTooltip": "Copy",
+  "leaveTooltip": "Leave",
+  "clearInputTooltip": "Clear input",
+  "peersFeatureComingSoon": "Peers feature coming soon",
+  "noPeersFound": "No peers found",
+
+  "navBarLabelStatus": "Status",
+  "navBarLabelNetworks": "Networks",
+  "navBarLabelPeers": "Peers",
+  "appBarTitleStatus": "Status",
+  "appBarTitleNetworks": "Networks",
+  "appBarTitlePeers": "Peers",
+
+  "joinNetworkSuccessText": "Successfully joined network {networkId}!",
+  "@joinNetworkSuccessText": {
+    "placeholders": {
+      "networkId": {
+        "type": "String",
+        "example": "1234567890abcdef"
+      }
+    }
+  },
+  "joinNetworkErrorText": "Failed to join network: {error}",
+  "@joinNetworkErrorText": {
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Connection timed out"
+      }
+    }
+  },
+  "leaveNetworkSuccessText": "Successfully left network {networkId}.",
+  "@leaveNetworkSuccessText": {
+    "placeholders": {
+      "networkId": {
+        "type": "String",
+        "example": "1234567890abcdef"
+      }
+    }
+  },
+  "leaveNetworkErrorText": "Failed to leave network: {error}",
+  "@leaveNetworkErrorText": {
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Permission denied"
+      }
+    }
+  },
+  "refreshButtonLabel": "Retry",
+
+  "loadPeersErrorText": "Failed to load peers: {error}",
+  "@loadPeersErrorText": {
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Network error"
+      }
+    }
+  },
+
+  "loadNetworksErrorText": "Failed to load networks: {error}",
+  "@loadNetworksErrorText": {
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Network error"
+      }
+    }
+  },
+
+  "serviceNotRunning": "ZeroTier service is not running",
+  
+  "moduleNotRunning": "ZeroTier Magisk module is not running. Please check if you have installed the ZeroTier Magisk module.",
+
+  "peerTunneled": "Relayed",
+  "peerDirect": "Direct"
+} 

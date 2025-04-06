@@ -1,0 +1,125 @@
+{
+  "@@locale": "zh",
+  "statusRunning": "运行中",
+  "statusStopped": "已停止",
+  "refreshStatusTooltip": "刷新状态",
+  "startButton": "启动",
+  "restartButton": "重启",
+  "stopButton": "停止",
+  "statusDetailsTitle": "ZeroTier 详细信息",
+  "nodeAddressLabel": "节点地址",
+  "softwareVersionLabel": "软件版本",
+  "onlineStatusLabel": "在线状态",
+  "onlineStatusOnline": "在线",
+  "onlineStatusOffline": "离线",
+  "primaryPortLabel": "主端口",
+  "listeningAddressesLabel": "监听地址:",
+  "noListeningAddresses": "无",
+
+  "leaveNetworkConfirmationTitle": "离开网络?",
+  "leaveNetworkConfirmationText": "您确定要离开网络 {networkId} 吗?",
+  "@leaveNetworkConfirmationText": {
+    "placeholders": {
+      "networkId": {
+        "type": "String",
+        "example": "1234567890abcdef"
+      }
+    }
+  },
+  "confirmButton": "确认",
+  "cancelButton": "取消",
+  "networkIdLabel": "网络 ID",
+  "networkIdHint": "输入 16 位网络 ID",
+  "invalidNetworkIdTitle": "无效的网络 ID",
+  "invalidNetworkIdText": "请输入一个 16 位的网络 ID。",
+  "joinButton": "加入",
+  "networksTitle": "网络",
+  "refreshNetworksTooltip": "刷新网络列表",
+  "noNetworksJoined": "未加入任何网络",
+  "copiedToClipboard": "已将 {networkId} 复制到剪贴板!",
+  "@copiedToClipboard": {
+    "placeholders": {
+      "networkId": {
+        "type": "String",
+        "example": "1234567890abcdef"
+      }
+    }
+  },
+  "copyTooltip": "复制",
+  "leaveTooltip": "离开",
+  "clearInputTooltip": "清除输入",
+  "peersFeatureComingSoon": "节点功能即将推出",
+  "noPeersFound": "未找到节点",
+
+  "navBarLabelStatus": "状态",
+  "navBarLabelNetworks": "网络",
+  "navBarLabelPeers": "节点",
+  "appBarTitleStatus": "状态",
+  "appBarTitleNetworks": "网络",
+  "appBarTitlePeers": "节点",
+
+  "joinNetworkSuccessText": "成功加入网络 {networkId}!",
+  "@joinNetworkSuccessText": {
+    "placeholders": {
+      "networkId": {
+        "type": "String",
+        "example": "1234567890abcdef"
+      }
+    }
+  },
+  "joinNetworkErrorText": "加入网络失败: {error}",
+  "@joinNetworkErrorText": {
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "连接超时"
+      }
+    }
+  },
+  "leaveNetworkSuccessText": "成功离开网络 {networkId}。",
+  "@leaveNetworkSuccessText": {
+    "placeholders": {
+      "networkId": {
+        "type": "String",
+        "example": "1234567890abcdef"
+      }
+    }
+  },
+  "leaveNetworkErrorText": "离开网络失败: {error}",
+  "@leaveNetworkErrorText": {
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "权限不足"
+      }
+    }
+  },
+  "refreshButtonLabel": "重试",
+
+  "loadPeersErrorText": "加载节点列表失败: {error}",
+  "@loadPeersErrorText": {
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "网络错误"
+      }
+    }
+  },
+
+  "loadNetworksErrorText": "加载网络列表失败: {error}",
+  "@loadNetworksErrorText": {
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "网络错误"
+      }
+    }
+  },
+
+  "serviceNotRunning": "ZeroTier服务未运行",
+  
+  "moduleNotRunning": "ZeroTier Magisk模块未运行，请检查您是否安装Zerotier Magisk模块。",
+
+  "peerTunneled": "中继",
+  "peerDirect": "直连"
+} 
