@@ -50,6 +50,7 @@ wait_until_login
 
 
 ZT_IFACE=$(ip link | awk -F': ' '/\bzt[0-9a-f]+\b/ {print $2; exit}')  # 也可根据设备具体接口写死
+HOT_IFACE=$(ip link | awk -F': ' '/swlan|ap0|softap/ {print $2; exit}')
 ZT_SCRIPT=$MODDIR/hotspot_iprule.sh
 
 # 判断是否启用热点（检测接口是否有 IP）
