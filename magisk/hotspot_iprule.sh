@@ -1,5 +1,5 @@
 #!/system/bin/sh
-
+ZTROOT=/data/adb/zerotier
 ACTION="$1"  # 参数：add 或 del
 
 
