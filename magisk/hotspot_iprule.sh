@@ -49,28 +49,6 @@ flush_rules() {
 }
 
 case "$ACTION" in
-  add)
-    add_chains_and_jumps
-    # 添加 NAT 规则到 ZT_NAT 链
-    iptables -t nat -A ZT_NAT -s "$HOT_CIDR" -o "$ZT_IFACE" -j MASQUERADE
-    # 添加转发规则到 ZT_FWD 链
-    iptables -A ZT_FWD -i "$HOT_IFACE" -o "$ZT_IFACE" -m state --state NEW,ESTABLISHED,RELATED -j ACCEPT
-    iptables -A ZT_FWD -i "$ZT_IFACE" -o "$HOT_IFACE" -m state --state ESTABLISHED,RELATED -j ACCEPT
-    echo "[ZT-NAT] Custom chains + jumps applied." >> "$ZTROOT/run/daemon.log"
-    ;;
-  del)
-    # 删除规则（只清空自定义链，保留跳转结构）
-    iptables -t nat -F ZT_NAT 2>/dev/null
-    iptables -F ZT_FWD 2>/dev/null
-    echo "[ZT-NAT] Custom chains flushed." >> "$ZTROOT/run/daemon.log"
-    ;;
-  *)
-    echo "Usage: $0 [add|del]"
-    exit 1
-    ;;
-esac
-
-case "$ACTION" in
     add)
         set_nat_rules
         echo "[ZT-NAT] Guard started." >> "$ZTROOT/run/daemon.log"
